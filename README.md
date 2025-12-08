@@ -73,7 +73,7 @@ While functional, there are several areas identified for future enhancement:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/CookManagement-API.git
+   git clone https://github.com/AssistedVeil86/CookManagement-API.git
    cd CookManagement-API
    ```
 
