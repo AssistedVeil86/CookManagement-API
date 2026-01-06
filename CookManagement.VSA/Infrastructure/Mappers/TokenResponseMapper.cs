@@ -1,4 +1,5 @@
 ﻿using CookManagement.VSA.Features.Authentication.Login;
+using CookManagement.VSA.Shared.DTOs;
 
 namespace CookManagement.VSA.Infrastructure.Mappers
 {

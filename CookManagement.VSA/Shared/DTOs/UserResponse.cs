@@ -1,6 +1,6 @@
 ﻿using CookManagement.VSA.Shared.Enums;
 
-namespace CookManagement.VSA.Features.Authentication.Login
+namespace CookManagement.VSA.Shared.DTOs
 {
     public sealed record UserResponse
     {

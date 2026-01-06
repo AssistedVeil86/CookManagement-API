@@ -1,6 +1,7 @@
 ﻿using CookManagement.VSA.Infrastructure.Auth;
 using CookManagement.VSA.Infrastructure.Data;
 using CookManagement.VSA.Infrastructure.Mappers;
+using CookManagement.VSA.Shared.DTOs;
 using CookManagement.VSA.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,7 @@ namespace CookManagement.VSA.Features.Authentication.Login
             }
 
             var accessToken = _tokenService.CreateAccessToken(user);
+            
             var userResponse = new UserResponse()
             {
                 UserId = user.Id,

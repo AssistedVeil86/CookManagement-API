@@ -1,4 +1,5 @@
-﻿using CookManagement.VSA.Features.Users.GetUserRecords;
+﻿using CookManagement.VSA.Features.Users.CreateUser;
+using CookManagement.VSA.Features.Users.GetUserRecords;
 using CookManagement.VSA.Infrastructure.Filters;
 
 namespace CookManagement.VSA.Features.Users
@@ -8,6 +9,7 @@ namespace CookManagement.VSA.Features.Users
         public static IServiceCollection RegisterUserHandlers(this IServiceCollection services)
         {
             services.AddScoped<GetUserRecordsHandler>();
+            services.AddScoped<CreateUserHandler>();
 
             return services;
         }
@@ -19,6 +21,7 @@ namespace CookManagement.VSA.Features.Users
                 .AddEndpointFilter<ExceptionFilter>();
 
             userGroup.MapGetUserRecordsEndpoint();
+            userGroup.MapCreateUserEndpoint();
 
             return app;
         }

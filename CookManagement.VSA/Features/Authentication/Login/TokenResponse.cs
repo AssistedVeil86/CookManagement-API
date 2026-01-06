@@ -1,4 +1,6 @@
-﻿namespace CookManagement.VSA.Features.Authentication.Login
+﻿using CookManagement.VSA.Shared.DTOs;
+using CookManagement.VSA.Shared.Entities;
+namespace CookManagement.VSA.Features.Authentication.Login
 {
     public sealed record TokenResponse
     {
