@@ -4,6 +4,6 @@
     {
         public string Code { get; set; } = String.Empty;
         public string Product { get; set; } = String.Empty;
-        public int CurrentStock { get; set; } = 0;
+        public double CurrentStock { get; set; } = 0;
     }
 }

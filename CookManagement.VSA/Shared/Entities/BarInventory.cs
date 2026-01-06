@@ -3,6 +3,6 @@
     public class BarInventory : BaseInventory
     {
         public string Category { get; set; } = String.Empty;
-        public int MinimumStock { get; set; } = 0;
+        public double MinimumStock { get; set; } = 0;
     }
 }

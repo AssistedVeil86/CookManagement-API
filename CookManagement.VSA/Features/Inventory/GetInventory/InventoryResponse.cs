@@ -6,6 +6,6 @@
         public string Product { get; init; } = String.Empty;
         public string Category { get; init; } = String.Empty;
         public string? MeasurementUnit { get; init; } = String.Empty;
-        public int CurrentStock { get; init; }
+        public double CurrentStock { get; init; }
     }
 }

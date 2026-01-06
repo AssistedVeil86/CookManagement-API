@@ -4,6 +4,6 @@
     {
         public string Category { get; set; } = String.Empty;
         public string MeasurementUnit { get; set; } = String.Empty;
-        public int MinimumStock { get; set; } = 0;
+        public double MinimumStock { get; set; } = 0;
     }
 }

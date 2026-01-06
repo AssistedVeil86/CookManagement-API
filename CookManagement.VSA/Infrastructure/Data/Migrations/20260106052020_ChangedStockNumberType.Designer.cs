@@ -3,17 +3,20 @@ using System;
 using CookManagement.VSA.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CookManagement.VSA.Migrations
+namespace CookManagement.VSA.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CookDbContext))]
-    partial class CookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260106052020_ChangedStockNumberType")]
+    partial class ChangedStockNumberType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

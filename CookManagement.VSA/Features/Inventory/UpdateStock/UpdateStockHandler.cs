@@ -37,7 +37,7 @@ namespace CookManagement.VSA.Features.Inventory.UpdateStock
                 _ => InventoryType.Bar
             };
         }
-        private async Task<InventoryItemResponse> UpdateBarProductStock(string productName, int newStock)
+        private async Task<InventoryItemResponse> UpdateBarProductStock(string productName, double newStock)
         {
             _logger.LogInformation("Se quiere actualizar el stock para el producto {productName}", productName);
 
@@ -56,7 +56,7 @@ namespace CookManagement.VSA.Features.Inventory.UpdateStock
             return InventoryItemMapper.MapToDto(product.Code, product.Product, product.CurrentStock);
         }
 
-        private async Task<InventoryItemResponse> UpdateKitchenProductStock(string productName, int newStock)
+        private async Task<InventoryItemResponse> UpdateKitchenProductStock(string productName, double newStock)
         {
             _logger.LogInformation("Se quiere actualizar el stock para el producto {productName}", productName);
 

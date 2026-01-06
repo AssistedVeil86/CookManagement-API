@@ -4,7 +4,7 @@ namespace CookManagement.VSA.Infrastructure.Mappers
 {
     public static class InventoryItemMapper
     {
-        public static InventoryItemResponse MapToDto(string code, string productName, int newStock)
+        public static InventoryItemResponse MapToDto(string code, string productName, double newStock)
         {
             return new InventoryItemResponse()
             {

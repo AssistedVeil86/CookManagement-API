@@ -1,5 +1,5 @@
-﻿using CookManagement.VSA.Infrastructure.Extensions;
-using System.Security.Claims;
+﻿using System.Security.Claims;
+using CookManagement.VSA.Infrastructure.Extensions;
 
 namespace CookManagement.VSA.Features.Inventory.UpdateStock
 {
