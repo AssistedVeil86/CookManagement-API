@@ -41,6 +41,7 @@ namespace CookManagement.VSA.Infrastructure.Data
             SeedAdmins(modelBuilder);
             SeedBarUsers(modelBuilder);
             SeedKitchenUsers(modelBuilder);
+            SeedSuperAdmin(modelBuilder);
         }
 
         private void ConfigureUserEntity(ModelBuilder modelBuilder)
@@ -230,6 +231,19 @@ namespace CookManagement.VSA.Infrastructure.Data
                     Name = "Gperez",
                     Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
                     Role = Shared.Enums.UserRole.Bar
+                }
+            );
+        }
+
+        private void SeedSuperAdmin(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 11,
+                    Name = "AdminLinus",
+                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Role = Shared.Enums.UserRole.SuperAdmin
                 }
             );
         }

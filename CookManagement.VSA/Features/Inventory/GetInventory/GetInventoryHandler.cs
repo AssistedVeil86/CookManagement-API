@@ -69,7 +69,8 @@ namespace CookManagement.VSA.Features.Inventory.GetInventory
                     Product = x.Product,
                     Category = x.Category,
                     MeasurementUnit = x.MeasurementUnit,
-                    CurrentStock = x.CurrentStock
+                    CurrentStock = x.CurrentStock,
+                    MinimumStock = x.MinimumStock
                 }).ToListAsync();
         }
 
@@ -85,7 +86,8 @@ namespace CookManagement.VSA.Features.Inventory.GetInventory
                     Product = x.Product,
                     Category = x.Category,
                     MeasurementUnit = null,
-                    CurrentStock = x.CurrentStock
+                    CurrentStock = x.CurrentStock,
+                    MinimumStock = x.MinimumStock
                 }).ToListAsync();
         }
 

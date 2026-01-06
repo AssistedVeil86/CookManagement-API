@@ -7,5 +7,6 @@
         public string Category { get; init; } = String.Empty;
         public string? MeasurementUnit { get; init; } = String.Empty;
         public double CurrentStock { get; init; }
+        public double MinimumStock { get; init; }
     }
 }
