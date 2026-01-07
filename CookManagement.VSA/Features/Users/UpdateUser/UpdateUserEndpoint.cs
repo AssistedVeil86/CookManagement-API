@@ -13,7 +13,8 @@ public static class UpdateUserEndpoint
         })
         .Produces(StatusCodes.Status404NotFound)
         .Produces<UserResponse>(StatusCodes.Status200OK)
-        .WithRequestValidation<UserRequest>();
+        .WithRequestValidation<UserRequest>()
+        .RequireAuthorization("SuperAdminOnly"); ;
 
         return groupBuilder;
     }

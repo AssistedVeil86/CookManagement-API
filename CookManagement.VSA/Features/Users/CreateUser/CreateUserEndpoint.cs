@@ -14,7 +14,8 @@ public static class CreateUserEndpoint
         })
         .Produces(StatusCodes.Status409Conflict)
         .Produces<UserResponse>(StatusCodes.Status201Created)
-        .WithRequestValidation<UserRequest>();
+        .WithRequestValidation<UserRequest>()
+        .RequireAuthorization("SuperAdminOnly");
 
         return groupBuilder;
     }

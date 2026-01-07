@@ -27,6 +27,7 @@ namespace CookManagement.VSA.Infrastructure.Auth
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("SuperAdminOnly", policy => policy.RequireRole("SuperAdmin"));
             });
 
             return services;
