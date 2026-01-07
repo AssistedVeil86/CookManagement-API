@@ -7,13 +7,14 @@ public static class CreateUserEndpoint
 {
     public static RouteGroupBuilder MapCreateUserEndpoint(this RouteGroupBuilder groupBuilder)
     {
-        groupBuilder.MapPost("", async (CreateUserRequest request, CreateUserHandler handler) =>
+        groupBuilder.MapPost("", async (UserRequest request, CreateUserHandler handler) =>
         {
             var result = await handler.HandleAsync(request);
             return Results.Created($"/api/user/{result.UserId}", result);
         })
+        .Produces(StatusCodes.Status409Conflict)
         .Produces<UserResponse>(StatusCodes.Status201Created)
-        .WithRequestValidation<CreateUserRequest>();
+        .WithRequestValidation<UserRequest>();
 
         return groupBuilder;
     }

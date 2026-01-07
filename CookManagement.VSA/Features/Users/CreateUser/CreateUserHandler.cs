@@ -10,7 +10,7 @@ namespace CookManagement.VSA.Features.Users.CreateUser;
 
 public sealed class CreateUserHandler(CookDbContext context, PasswordHasher hasher)
 {
-    public async Task<UserResponse> HandleAsync(CreateUserRequest request)
+    public async Task<UserResponse> HandleAsync(UserRequest request)
     {
         var userExists = await context.Users
             .Where(u => u.Name == request.Name).AnyAsync();
