@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CookManagement.VSA.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CookDbContext))]
-    [Migration("20260106052020_ChangedStockNumberType")]
-    partial class ChangedStockNumberType
+    [Migration("20260107214916_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,71 +123,78 @@ namespace CookManagement.VSA.Infrastructure.Data.Migrations
                         {
                             Id = 1,
                             Name = "Vcastro",
-                            Password = "$2a$11$UEkM3opzq17e8AhGeGIUYe..KGetx6gKOcqrcaFl8vc0WmrMd4Nqa",
+                            Password = "$2a$11$aElS0hr6kgwIr0X.brMh5uuTvi73CQW5GABfYPFKusabGwUWdyO16",
                             Role = "Admin"
                         },
                         new
                         {
                             Id = 2,
                             Name = "Gcastillo",
-                            Password = "$2a$11$r3WNHTuc0SkY02S48LrK8.Zs0Z0NQ90MDbXxPy6Xv4RTMj3TVcs86",
+                            Password = "$2a$11$blGVpdghJa.CegLgvKG8qO9qUgqOaEHSJHizAWRiYQrAX9mziUMn2",
                             Role = "Admin"
                         },
                         new
                         {
                             Id = 3,
                             Name = "Pcasco",
-                            Password = "$2a$11$NxDwlOtpsljFJeyODG/G9eDBm8NxFKrT6/Uud.AFLSecTWgz.73um",
+                            Password = "$2a$11$CjVUWTGXwxY4vNKRd0lYAexfYotn/r8yFde.CyP55bhkKgdYKXqUa",
                             Role = "Admin"
                         },
                         new
                         {
                             Id = 7,
                             Name = "SherMurillo",
-                            Password = "$2a$11$Pjr/oI5YAGz3.e7fZEx8KuqLinbYvnhmmUS36D/pCLGtTiyPf20cO",
+                            Password = "$2a$11$cc9VqcLdY8uKe8HXF/IXEuPahlEkZc6b6E6.zeM7CX1tgeo50Reo6",
                             Role = "Bar"
                         },
                         new
                         {
                             Id = 8,
                             Name = "Elinuñez",
-                            Password = "$2a$11$ri2dKmLr3SGlW5o2xbHC.OsAyGIC1v2niASUHVXquZFR95mazYGNm",
+                            Password = "$2a$11$DYn0HSFfeH3waYcTURasIOr2moezNVVfvWGv7vsq7STKwPce1P.ju",
                             Role = "Bar"
                         },
                         new
                         {
                             Id = 10,
                             Name = "Gperez",
-                            Password = "$2a$11$C6kpQ45UpxOzIt3bBVCKhOG6mFTxn.XlYtJyg3hHyf8nEr2cAOlsW",
+                            Password = "$2a$11$mGbF86VoAmOWm0SednWlm.bbGnCmfigGOBpZVcHTT2O5nmmttujei",
                             Role = "Bar"
                         },
                         new
                         {
                             Id = 4,
                             Name = "Alevaldez",
-                            Password = "$2a$11$8MNvFMZusRAWEHTu771bE.YwZfcsUUU.K2KhGMHpFHR5pzGd9l5hW",
+                            Password = "$2a$11$WClTW5H6sFdmCCwpora9auu42eaf0A7I8XnvOZCp0GhFNOamqatfe",
                             Role = "Cocina"
                         },
                         new
                         {
                             Id = 5,
                             Name = "Marifonseca",
-                            Password = "$2a$11$3XqAMQKih2G84B/pW2hM9ex2bB5/AiQxt.F/0hrngUlnf7R5TQmb6",
+                            Password = "$2a$11$sKvEiP3IeT6loYwNUNcH6uejIOvFJgX47eGzspu7zvoOavBhClpDu",
                             Role = "Cocina"
                         },
                         new
                         {
                             Id = 6,
                             Name = "Astridvalle",
-                            Password = "$2a$11$uo9BQ6gw.QVUyZSyq6vIyO/ZLGZ1fj5e7HH2oYW7inTHLD/dliSvu",
+                            Password = "$2a$11$seXD2yWRfoHwwpOuoerdWOeq.JJVlMbE.PPtAXZQWgwYIAeOOJM1i",
                             Role = "Cocina"
                         },
                         new
                         {
                             Id = 9,
                             Name = "Jcastillo",
-                            Password = "$2a$11$nhyctQDc2WkVHsCr.57bvO5fH3f0slzqmlxr7MH2U6ydz/7L94poq",
+                            Password = "$2a$11$fiwD6A0qlX4pzdC339j8auS794DMzFBpnfu0WuRlcxLlJReZSWlrO",
                             Role = "Cocina"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "AdminLinus",
+                            Password = "$2a$11$VXyDpEc.0Ib96s8LpT.51OKfNYAE6HnswSnvW0ZsMMRHr1NdC6wf.",
+                            Role = "SuperAdmin"
                         });
                 });
 
@@ -207,7 +214,7 @@ namespace CookManagement.VSA.Infrastructure.Data.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2026, 1, 5, 23, 20, 15, 856, DateTimeKind.Unspecified).AddTicks(6818), new TimeSpan(0, -6, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2026, 1, 7, 15, 49, 12, 456, DateTimeKind.Unspecified).AddTicks(1854), new TimeSpan(0, -6, 0, 0, 0)));
 
                     b.Property<int>("DailyMove")
                         .ValueGeneratedOnAdd()
@@ -261,7 +268,7 @@ namespace CookManagement.VSA.Infrastructure.Data.Migrations
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2026, 1, 5, 23, 20, 15, 856, DateTimeKind.Unspecified).AddTicks(9275), new TimeSpan(0, -6, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2026, 1, 7, 15, 49, 12, 456, DateTimeKind.Unspecified).AddTicks(3366), new TimeSpan(0, -6, 0, 0, 0)));
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
