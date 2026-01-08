@@ -1,5 +1,7 @@
 using CookManagement.VSA.Features.Users.CreateUser;
+using CookManagement.VSA.Features.Users.GetUserById;
 using CookManagement.VSA.Features.Users.GetUserRecords;
+using CookManagement.VSA.Features.Users.GetUsers;
 using CookManagement.VSA.Features.Users.UpdateUser;
 using CookManagement.VSA.Infrastructure.Filters;
 
@@ -12,6 +14,8 @@ namespace CookManagement.VSA.Features.Users
             services.AddScoped<GetUserRecordsHandler>();
             services.AddScoped<CreateUserHandler>();
             services.AddScoped<UpdateUserHandler>();
+            services.AddScoped<GetUserByIdHandler>();
+            services.AddScoped<GetUsersHandler>();
 
             return services;
         }
@@ -25,6 +29,8 @@ namespace CookManagement.VSA.Features.Users
             userGroup.MapGetUserRecordsEndpoint();
             userGroup.MapCreateUserEndpoint();
             userGroup.MapUpdateUserEndpoint();
+            userGroup.MapGetUserByIdEndpoint();
+            userGroup.MapGetUsersEndpoint();
 
             return app;
         }
