@@ -45,6 +45,27 @@ public class TimeZoneService
     //     var userTimeZone = GetTimeZoneInfo(timeZoneId);
     //     return TimeZoneInfo.ConvertTime(utcDateTime, userTimeZone);
     // }
+
+    public (DateTime startOfDayUtc, DateTime endOfDayUtc) GetCurrentDateBoundariesInUtc
+        (string? timeZoneId, DateTime requestedDate)
+    {
+        var userTimeZone = GetTimeZoneInfo(timeZoneId);
+
+        var userLocalDate = TimeZoneInfo.ConvertTime(requestedDate, userTimeZone);
+
+        var startOfDayLocal = userLocalDate.Date;
+        var endOfDayLocal = startOfDayLocal.AddDays(1);
+
+        var startOfDayUtc = TimeZoneInfo.ConvertTimeToUtc(
+            startOfDayLocal,
+            userTimeZone);
+
+        var endOfDayUtc = TimeZoneInfo.ConvertTimeToUtc(
+            endOfDayLocal, 
+            userTimeZone);
+
+        return (startOfDayUtc, endOfDayUtc);
+    }
     
     private TimeZoneInfo GetTimeZoneInfo(string? timeZoneId)
     {
