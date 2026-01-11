@@ -63,7 +63,7 @@ namespace CookManagement.VSA.Features.Movements.RegisterMovements
                 .MapToDto(userRecord.ProductCode, movementCount, request.MovementType);
         }
 
-        private async Task<int> RegisterMovementType(UserRecord record, MovementRequest request, InventoryType inventoryType)
+        private async Task<Double> RegisterMovementType(UserRecord record, MovementRequest request, InventoryType inventoryType)
         {
             return request.MovementType switch
             {
@@ -75,7 +75,7 @@ namespace CookManagement.VSA.Features.Movements.RegisterMovements
             };
         }
 
-        private async Task<int> UpdateStockForEntry(UserRecord record, MovementRequest request, InventoryType inventoryType)
+        private async Task<Double> UpdateStockForEntry(UserRecord record, MovementRequest request, InventoryType inventoryType)
         {
             BaseInventory? inventoryItem = null;
 
@@ -94,7 +94,7 @@ namespace CookManagement.VSA.Features.Movements.RegisterMovements
                 throw new CustomNotFoundException($"El Producto con código {request.ProductCode} no existe en " +
                     $"el Inventario de {inventoryType}");
 
-            var entries = record.Entries += request.MovementCount;
+            var entries = record.Entries + request.MovementCount;
             inventoryItem.CurrentStock += entries;
 
             return entries;

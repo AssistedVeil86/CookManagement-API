@@ -153,21 +153,21 @@ namespace CookManagement.VSA.Infrastructure.Data
                 {
                     Id = 1,
                     Name = "Vcastro",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.Admin
                 },
                 new User
                 {
                     Id = 2,
                     Name = "Gcastillo",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.Admin
                 },
                 new User
                 {
                     Id = 3,
                     Name = "Pcasco",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.Admin
                 }
             );
@@ -180,28 +180,28 @@ namespace CookManagement.VSA.Infrastructure.Data
                 {
                     Id = 4,
                     Name = "Alevaldez",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.Cocina
                 },
                 new User
                 {
                     Id = 5,
                     Name = "Marifonseca",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.Cocina
                 },
                 new User
                 {
                     Id = 6,
                     Name = "Astridvalle",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.Cocina
                 },
                 new User
                 {
                     Id = 9,
                     Name = "Jcastillo",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.Cocina
                 }
             );
@@ -214,14 +214,14 @@ namespace CookManagement.VSA.Infrastructure.Data
                 {
                     Id = 7,
                     Name = "SherMurillo",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.Bar
                 },
                 new User
                 {
                     Id = 8,
                     Name = "Elinuñez",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.Bar
                 },
 
@@ -229,7 +229,7 @@ namespace CookManagement.VSA.Infrastructure.Data
                 {
                     Id = 10,
                     Name = "Gperez",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.Bar
                 }
             );
@@ -242,7 +242,7 @@ namespace CookManagement.VSA.Infrastructure.Data
                 {
                     Id = 11,
                     Name = "AdminLinus",
-                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword123!"),
+                    Password = BCrypt.Net.BCrypt.HashPassword("Puntoparatodos597$!"),
                     Role = Shared.Enums.UserRole.SuperAdmin
                 }
             );

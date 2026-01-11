@@ -5,7 +5,7 @@ namespace CookManagement.VSA.Infrastructure.Mappers
 {
     public static class MovementResponseMapper
     {
-        public static MovementResponse MapToDto(string productCode, int count, MovementType movementType)
+        public static MovementResponse MapToDto(string productCode, Double count, MovementType movementType)
         {
             return new MovementResponse()
             {

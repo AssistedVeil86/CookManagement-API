@@ -6,6 +6,6 @@ namespace CookManagement.VSA.Features.Movements.RegisterMovements
     {
         public string ProductCode { get; set; } = String.Empty;
         public MovementType MovementType { get; set; }
-        public int MovementCount { get; set; }
+        public Double MovementCount { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace CookManagement.VSA.Features.Users
 
         public static WebApplication MapUserEndpoints(this WebApplication app)
         {
-            var userGroup = app.MapGroup("api/user/")
+            var userGroup = app.MapGroup("api/users/")
                 .WithTags("Users")
                 .AddEndpointFilter<ExceptionFilter>();
 

@@ -6,7 +6,7 @@ namespace CookManagement.VSA.Features.Movements.CreateInitialCount
     {
         public int UserId { get; init; }
         public string ProductCode { get; init; } = String.Empty;
-        public int InitialInventory { get; init; } = 0;
+        public Double InitialInventory { get; init; } = 0;
         public InventoryType InventoryType { get; init; }
         public DateTimeOffset CreatedAt { get; init; }
         public DateTimeOffset UpdatedAt { get; init; }

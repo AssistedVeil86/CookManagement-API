@@ -71,14 +71,14 @@ namespace CookManagement.VSA.Features.Movements.UpdateFinalCount
             return FinalCountMapper.MapToDto(userRecord);
         }
 
-        private int CalculateDifference(UserRecord record, int dailyMove)
+        private Double CalculateDifference(UserRecord record, double dailyMove)
         {
             var sales = dailyMove - record.FinalInventory;
 
             return sales;
         }
 
-        private int CalculateDailyMovement(UserRecord record)
+        private Double CalculateDailyMovement(UserRecord record)
         {
             return record.InitialInventory + record.Entries - (record.Damaged + record.Courtesy + record.Remains);
         }

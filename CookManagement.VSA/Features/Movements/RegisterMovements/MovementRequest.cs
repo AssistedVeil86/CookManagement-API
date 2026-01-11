@@ -6,7 +6,7 @@ namespace CookManagement.VSA.Features.Movements.RegisterMovements
     {
         public string ProductCode { get; init; } = String.Empty;
         public MovementType MovementType { get; init; }
-        public int MovementCount { get; init; }
+        public Double MovementCount { get; init; }
         public string? TimeZoneId { get; init; } = string.Empty;
     }
 }
