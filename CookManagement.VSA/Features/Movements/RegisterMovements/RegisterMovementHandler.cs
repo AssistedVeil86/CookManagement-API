@@ -1,5 +1,5 @@
 ﻿using CookManagement.VSA.Infrastructure.Data;
-using CookManagement.VSA.Infrastructure.Mappers;
+using CookManagement.VSA.Infrastructure.Extensions;
 using CookManagement.VSA.Infrastructure.TimeZones;
 using CookManagement.VSA.Shared.Entities;
 using CookManagement.VSA.Shared.Enums;
@@ -59,8 +59,7 @@ namespace CookManagement.VSA.Features.Movements.RegisterMovements
                                    "movimiento de tipo: {movement}, con cantidad: {count}"
                 , userId, request.MovementType, movementCount);
 
-            return MovementResponseMapper
-                .MapToDto(userRecord.ProductCode, movementCount, request.MovementType);
+            return MappingExtensions.MapToMovementResponse(userRecord.ProductCode, movementCount, request.MovementType);
         }
 
         private async Task<Double> RegisterMovementType(UserRecord record, MovementRequest request, InventoryType inventoryType)
@@ -96,6 +95,7 @@ namespace CookManagement.VSA.Features.Movements.RegisterMovements
 
             var entries = record.Entries + request.MovementCount;
             inventoryItem.CurrentStock += entries;
+            record.Entries = (int)entries;
 
             return entries;
         }

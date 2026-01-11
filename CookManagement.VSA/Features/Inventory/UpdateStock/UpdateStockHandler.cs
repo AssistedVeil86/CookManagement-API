@@ -1,5 +1,5 @@
 ﻿using CookManagement.VSA.Infrastructure.Data;
-using CookManagement.VSA.Infrastructure.Mappers;
+using CookManagement.VSA.Infrastructure.Extensions;
 using CookManagement.VSA.Shared.Enums;
 using CookManagement.VSA.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -53,7 +53,7 @@ namespace CookManagement.VSA.Features.Inventory.UpdateStock
             _logger.LogInformation("Se ha actualizado el stock para el producto {productName}: {productStock}",
                 product.Product, product.CurrentStock);
 
-            return InventoryItemMapper.MapToDto(product.Code, product.Product, product.CurrentStock);
+            return MappingExtensions.MapToInvItemResponse(product.Code, product.Product, product.CurrentStock);
         }
 
         private async Task<InventoryItemResponse> UpdateKitchenProductStock(string productName, double newStock)
@@ -72,7 +72,7 @@ namespace CookManagement.VSA.Features.Inventory.UpdateStock
             _logger.LogInformation("Se ha actualizado el stock para el producto {productName}: {productStock}",
                 product.Product, product.CurrentStock);
 
-            return InventoryItemMapper.MapToDto(product.Code, product.Product, product.CurrentStock);
+            return MappingExtensions.MapToInvItemResponse(product.Code, product.Product, product.CurrentStock);
         }
 
     }

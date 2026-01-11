@@ -1,6 +1,6 @@
 using CookManagement.VSA.Infrastructure.Auth;
 using CookManagement.VSA.Infrastructure.Data;
-using CookManagement.VSA.Infrastructure.Mappers;
+using CookManagement.VSA.Infrastructure.Extensions;
 using CookManagement.VSA.Shared.DTOs;
 using CookManagement.VSA.Shared.Entities;
 using CookManagement.VSA.Shared.Exceptions;
@@ -30,6 +30,6 @@ public sealed class CreateUserHandler(CookDbContext context, PasswordHasher hash
         context.Users.Add(user);
         await context.SaveChangesAsync();
 
-        return UserResponseMapper.MapToDto(user);
+        return user.MapToUserResponse();
     }
 }

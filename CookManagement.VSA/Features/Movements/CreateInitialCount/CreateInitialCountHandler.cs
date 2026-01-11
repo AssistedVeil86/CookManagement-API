@@ -1,5 +1,5 @@
 ﻿using CookManagement.VSA.Infrastructure.Data;
-using CookManagement.VSA.Infrastructure.Mappers;
+using CookManagement.VSA.Infrastructure.Extensions;
 using CookManagement.VSA.Infrastructure.TimeZones;
 using CookManagement.VSA.Shared.DTOs;
 using CookManagement.VSA.Shared.Entities;
@@ -91,7 +91,7 @@ namespace CookManagement.VSA.Features.Movements.CreateInitialCount
                                    "inventario inicial para el producto con codigo {productCode}",
                 user.Name, request.ProductCode, user.Id);
 
-            return InitialCountMapper.MapToDto(userRecord);
+            return userRecord.MapToInitialCount();
         }
 
         private async Task<BaseInventory> GetInventoryProductNameByType(InventoryType inventoryType, string code)

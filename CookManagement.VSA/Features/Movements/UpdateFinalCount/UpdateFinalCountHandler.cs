@@ -1,5 +1,5 @@
 ﻿using CookManagement.VSA.Infrastructure.Data;
-using CookManagement.VSA.Infrastructure.Mappers;
+using CookManagement.VSA.Infrastructure.Extensions;
 using CookManagement.VSA.Infrastructure.TimeZones;
 using CookManagement.VSA.Shared.DTOs;
 using CookManagement.VSA.Shared.Entities;
@@ -68,7 +68,7 @@ namespace CookManagement.VSA.Features.Movements.UpdateFinalCount
                                    "para el producto con código {productCode}, con cantidad: {count}"
                 , userId, request.ProductCode, request.Count);
 
-            return FinalCountMapper.MapToDto(userRecord);
+            return userRecord.MapToFinalCount();
         }
 
         private Double CalculateDifference(UserRecord record, double dailyMove)

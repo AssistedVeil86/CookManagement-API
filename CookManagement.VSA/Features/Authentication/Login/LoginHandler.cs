@@ -1,6 +1,6 @@
 ﻿using CookManagement.VSA.Infrastructure.Auth;
 using CookManagement.VSA.Infrastructure.Data;
-using CookManagement.VSA.Infrastructure.Mappers;
+using CookManagement.VSA.Infrastructure.Extensions;
 using CookManagement.VSA.Shared.DTOs;
 using CookManagement.VSA.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +48,7 @@ namespace CookManagement.VSA.Features.Authentication.Login
             _logger.LogInformation("El Usuario {userName} con ID {userId} ha iniciado sesión exitosamente.",
                 userResponse.Name, userResponse.UserId);
 
-            return TokenResponseMapper.MapToDto(accessToken, _tokenService.GetExpirationDate(), userResponse);
+            return userResponse.MapToTokenResponse(accessToken, _tokenService.GetExpirationDate());
         }
 
     }

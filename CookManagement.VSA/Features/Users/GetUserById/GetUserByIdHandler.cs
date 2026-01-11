@@ -1,5 +1,5 @@
 using CookManagement.VSA.Infrastructure.Data;
-using CookManagement.VSA.Infrastructure.Mappers;
+using CookManagement.VSA.Infrastructure.Extensions;
 using CookManagement.VSA.Shared.DTOs;
 using CookManagement.VSA.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +15,6 @@ public class GetUserByIdHandler(CookDbContext context)
         if (user is null)
             throw new CustomNotFoundException("Ese usuario no encontrado");
 
-        return UserResponseMapper.MapToDto(user);
+        return user.MapToUserResponse();
     }
 }
