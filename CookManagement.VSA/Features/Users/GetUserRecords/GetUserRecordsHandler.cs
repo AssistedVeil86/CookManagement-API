@@ -31,12 +31,19 @@ namespace CookManagement.VSA.Features.Users.GetUserRecords
                 ? InventoryType.Cocina
                 : InventoryType.Bar;
 
-            var (startOfDayUtc, endOfDayUtc) = _timeZoneService.GetTodayBoundariesInUtc(timeZoneId);
+            //var (startOfDayUtc, endOfDayUtc) = _timeZoneService.GetTodayBoundariesInUtc(timeZoneId);
+
+            //var baseQuery = _context.UserRecords.AsNoTracking()
+            //    .Where(r => r.UserId == user.Id
+            //            && r.CreatedAt >= startOfDayUtc
+            //            && r.CreatedAt < endOfDayUtc
+            //            && r.InventoryType == inventoryType);
+
+            var utcRequestedDate = requestedDate.ToUniversalTime();
 
             var baseQuery = _context.UserRecords.AsNoTracking()
                 .Where(r => r.UserId == user.Id
-                        && r.CreatedAt >= startOfDayUtc
-                        && r.CreatedAt < endOfDayUtc
+                        && r.CreatedAt == utcRequestedDate
                         && r.InventoryType == inventoryType);
 
             var userRecords = await baseQuery
