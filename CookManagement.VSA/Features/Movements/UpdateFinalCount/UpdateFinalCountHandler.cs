@@ -83,7 +83,7 @@ namespace CookManagement.VSA.Features.Movements.UpdateFinalCount
             return record.InitialInventory + record.Entries - (record.Damaged + record.Courtesy + record.Remains);
         }
 
-        private async Task UpdateInventoryProductStock(InventoryType inventoryType, string code, int finalCount)
+        private async Task UpdateInventoryProductStock(InventoryType inventoryType, string code, Double finalCount)
         {
             BaseInventory? inventoryItem = null;
 
