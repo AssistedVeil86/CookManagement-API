@@ -228,7 +228,14 @@ namespace CookManagement.VSA.Infrastructure.Data
                 new User
                 {
                     Id = 10,
-                    Name = "Gperez",
+                    Name = "Lorebustillo",
+                    Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword"),
+                    Role = Shared.Enums.UserRole.Bar
+                }
+                new User
+                {
+                    Id = 11,
+                    Name = "Elisanchez",
                     Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword"),
                     Role = Shared.Enums.UserRole.Bar
                 }
@@ -240,7 +247,7 @@ namespace CookManagement.VSA.Infrastructure.Data
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
-                    Id = 11,
+                    Id = 12,
                     Name = "AdminLinus",
                     Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword"),
                     Role = Shared.Enums.UserRole.SuperAdmin

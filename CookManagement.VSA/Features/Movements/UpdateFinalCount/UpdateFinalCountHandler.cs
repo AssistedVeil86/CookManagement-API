@@ -103,7 +103,7 @@ namespace CookManagement.VSA.Features.Movements.UpdateFinalCount
             if (inventoryItem.CurrentStock < finalCount || inventoryItem.CurrentStock == 0)
                 throw new CustomInvalidOperationException("El Conteo Final no puede ser mayor al Stock");
 
-            inventoryItem.CurrentStock -= finalCount;
+            inventoryItem.CurrentStock = finalCount;
         }
     }
 }
