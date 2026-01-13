@@ -231,7 +231,7 @@ namespace CookManagement.VSA.Infrastructure.Data
                     Name = "Lorebustillo",
                     Password = BCrypt.Net.BCrypt.HashPassword("GenericPassword"),
                     Role = Shared.Enums.UserRole.Bar
-                }
+                },
                 new User
                 {
                     Id = 11,
