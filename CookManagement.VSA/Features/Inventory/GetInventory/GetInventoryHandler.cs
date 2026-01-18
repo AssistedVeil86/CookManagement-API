@@ -15,7 +15,7 @@ namespace CookManagement.VSA.Features.Inventory.GetInventory
         }
 
         public async Task<InventoryPaginatedResponse> HandleAsync(
-            int userId, string userRole, int page, int pageSize, InventoryType? inventoryType)
+            int userId, string userRole, int page, int pageSize, InventoryType? inventoryType, string? category)
         {
             var userExists = await _context.Users.AnyAsync(u => u.Id == userId);
             if (!userExists)
@@ -23,7 +23,7 @@ namespace CookManagement.VSA.Features.Inventory.GetInventory
 
             var requestedInventoryType = DetermineInventoryType(userRole, inventoryType);
 
-            var inventory = await GetInventoryByType(requestedInventoryType, page, pageSize);
+            var inventory = await GetInventoryByType(requestedInventoryType, page, pageSize, category);
             var productCount = await CountInventoryByType(requestedInventoryType);
 
             return new InventoryPaginatedResponse()
@@ -44,11 +44,11 @@ namespace CookManagement.VSA.Features.Inventory.GetInventory
         }
 
         private async Task<List<InventoryResponse>> GetInventoryByType(
-            InventoryType requestedType, int page, int pageSize)
+            InventoryType requestedType, int page, int pageSize, string? category)
         {
             return requestedType == InventoryType.Cocina
-                ? await GetKitchenInventory(page, pageSize)
-                : await GetBarInventory(page, pageSize);
+                ? await GetKitchenInventory(page, pageSize, category)
+                : await GetBarInventory(page, pageSize, category);
         }
 
         private async Task<int> CountInventoryByType(InventoryType requestedType)
@@ -58,10 +58,10 @@ namespace CookManagement.VSA.Features.Inventory.GetInventory
                 : await GetBarInventoryCount();
         }
 
-        private async Task<List<InventoryResponse>> GetKitchenInventory(int page, int pageSize)
+        private async Task<List<InventoryResponse>> GetKitchenInventory(int page, int pageSize, string? category)
         {
             return await _context.KitchenInventory.AsNoTracking()
-                //.Where(x => EF.Functions.Like(x.Category, category))
+                .Where(x => x.Category.Contains(category))
                 .OrderBy(x => x.Code)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -76,10 +76,10 @@ namespace CookManagement.VSA.Features.Inventory.GetInventory
                 }).ToListAsync();
         }
 
-        private async Task<List<InventoryResponse>> GetBarInventory(int page, int pageSize)
+        private async Task<List<InventoryResponse>> GetBarInventory(int page, int pageSize, string? category)
         {
             return await _context.BarInventory.AsNoTracking()
-                //.Where(x => EF.Functions.Like(x.Category, category))
+                .Where(x => x.Category.Contains(category))
                 .OrderBy(x => x.Code)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)

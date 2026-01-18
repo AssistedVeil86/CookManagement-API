@@ -14,9 +14,16 @@ public class TimeZoneService
 
         var userLocalNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, userTimeZone);
 
+        if (userLocalNow.Hour < 10)
+        {
+            userLocalNow = userLocalNow.AddDays(-1);
+        }
+
+        var baseDate = userLocalNow.Date;
+
         //Obtener Limites Locales
-        var startOfDayLocal = userLocalNow.Date;
-        var endOfDayLocal = startOfDayLocal.AddDays(1);
+        var startOfDayLocal = baseDate.AddHours(10);
+        var endOfDayLocal = baseDate.AddDays(1).AddHours(2);
 
         //Obtener Limites en UTC
         var startOfDayUtc = TimeZoneInfo.ConvertTimeToUtc(
@@ -50,18 +57,21 @@ public class TimeZoneService
         (string? timeZoneId, DateTime requestedDate)
     {
         var userTimeZone = GetTimeZoneInfo(timeZoneId);
+        var userLocalNow = TimeZoneInfo.ConvertTime(requestedDate, userTimeZone);
 
-        var userLocalDate = TimeZoneInfo.ConvertTime(requestedDate, userTimeZone);
+        var baseDate = userLocalNow.Date;
 
-        var startOfDayLocal = userLocalDate.Date;
-        var endOfDayLocal = startOfDayLocal.AddDays(1);
+        //Obtener Limites Locales
+        var startOfDayLocal = baseDate.AddHours(10);
+        var endOfDayLocal = baseDate.AddDays(1).AddHours(2);
 
+        //Obtener Limites en UTC
         var startOfDayUtc = TimeZoneInfo.ConvertTimeToUtc(
             startOfDayLocal,
             userTimeZone);
 
         var endOfDayUtc = TimeZoneInfo.ConvertTimeToUtc(
-            endOfDayLocal, 
+            endOfDayLocal,
             userTimeZone);
 
         return (startOfDayUtc, endOfDayUtc);

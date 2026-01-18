@@ -10,13 +10,13 @@ namespace CookManagement.VSA.Features.Inventory.GetInventory
         {
             groupBuilder.MapGet("",
                     async (GetInventoryHandler handler, ClaimsPrincipal user, InventoryType? inventoryType,
-                        int page = 1, int pageSize = 12) =>
+                        string? category = "", int page = 1, int pageSize = 12) =>
                     {
                         var userId = user.GetUserId();
                         var userRole = user.GetUserRole();
 
                         var result =
-                        await handler.HandleAsync(userId, userRole, page, pageSize, inventoryType);
+                        await handler.HandleAsync(userId, userRole, page, pageSize, inventoryType, category);
 
                         return Results.Ok(result);
                     })
