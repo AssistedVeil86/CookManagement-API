@@ -5,15 +5,13 @@ using CookManagement.VSA.Features.Users;
 using CookManagement.VSA.Infrastructure.Auth;
 using CookManagement.VSA.Infrastructure.Data;
 using CookManagement.VSA.Infrastructure.Extensions;
+using Scalar.AspNetCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.ConfigureSwagger();
+builder.Services.AddOpenApi();
 
 //Add Database, Jwt Config, and CORS
 builder.Services.AddDatabase(builder.Configuration);
@@ -39,8 +37,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.MapOpenApi();
+    app.MapScalarApiReference("scalar", options => options.Layout = ScalarLayout.Classic);
 }
 
 app.UseHttpsRedirection();

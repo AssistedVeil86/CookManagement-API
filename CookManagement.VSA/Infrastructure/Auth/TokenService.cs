@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using CookManagement.VSA.Shared.Entities;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Extensions;
+using Microsoft.OpenApi;
 
 namespace CookManagement.VSA.Infrastructure.Auth
 {
