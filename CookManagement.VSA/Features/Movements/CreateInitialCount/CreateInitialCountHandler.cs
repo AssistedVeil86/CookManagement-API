@@ -26,9 +26,8 @@ namespace CookManagement.VSA.Features.Movements.CreateInitialCount
         }
 
         public async Task<InitialCountResponse> HandleAsync(
-            int userId, string userRole, CountRequest request)
+            int userId, string userRole, CountRequest request, InventoryType? inventoryType)
         {
-
             if (request.Count < 0)
                 throw new CustomInvalidOperationException("El Conteo Inicial no puede ser negativo");
 
@@ -41,24 +40,21 @@ namespace CookManagement.VSA.Features.Movements.CreateInitialCount
                         && r.ProductCode == request.ProductCode)
                 .AnyAsync();
 
-
             if (todayRecord)
                 throw new CustomConflictException("El Inventario Inicial para ese Producto ya ha sido creado");
 
-            var user = await _context.Users.FindAsync(userId);
+            var user = await _context.Users.FindAsync(userId)
+                ?? throw new CustomNotFoundException("El Usuario no existe");
 
-            if (user is null)
-                throw new CustomNotFoundException("El Usuario no existe");
+            var resolvedInventoryType = inventoryType ??
+                (userRole == nameof(UserRole.Cocina) ? InventoryType.Cocina : InventoryType.Bar);
 
-            var inventoryType = userRole == nameof(UserRole.Cocina)
-                        ? InventoryType.Cocina
-                        : InventoryType.Bar;
-
-            var inventoryProduct = await GetInventoryProductNameByType(inventoryType, request.ProductCode);
+            var inventoryProduct = await
+                GetInventoryProductNameByType(resolvedInventoryType, request.ProductCode);
 
             if (request.Count > inventoryProduct.CurrentStock || request.Count < inventoryProduct.CurrentStock)
                 throw new CustomInvalidOperationException("El Conteo Inicial es Inválido");
-            
+
             _logger.LogInformation("El usuario {userName} con ID {userId} quiere registrar el " +
                                    "inventario inicial para el producto con codigo {productCode}",
                 user.Name, user.Id, request.ProductCode);
@@ -79,7 +75,7 @@ namespace CookManagement.VSA.Features.Movements.CreateInitialCount
                 Courtesy = 0,
                 Damaged = 0,
                 Remains = 0,
-                InventoryType = inventoryType,
+                InventoryType = resolvedInventoryType,
                 CreatedAt = utcNow,
                 UpdatedAt = utcNow,
             };

@@ -8,21 +8,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CookManagement.VSA.Features.Movements.RegisterMovements
 {
-    public class RegisterMovementHandler
+    public class RegisterMovementHandler(
+        CookDbContext context,
+        ILogger<RegisterMovementHandler> logger,
+        TimeZoneService timeZoneService)
     {
-        private readonly CookDbContext _context;
-        private readonly TimeZoneService _timeZoneService;
-        private readonly ILogger<RegisterMovementHandler> _logger;
-
-        public RegisterMovementHandler(
-            CookDbContext context,
-            ILogger<RegisterMovementHandler> logger,
-            TimeZoneService timeZoneService)
-        {
-            _context = context;
-            _logger = logger;
-            _timeZoneService = timeZoneService;
-        }
+        private readonly CookDbContext _context = context;
+        private readonly TimeZoneService _timeZoneService = timeZoneService;
+        private readonly ILogger<RegisterMovementHandler> _logger = logger;
 
         public async Task<MovementResponse> HandleAsync(int userId, string userRole, MovementRequest request)
         {
@@ -43,10 +36,8 @@ namespace CookManagement.VSA.Features.Movements.RegisterMovements
                         && r.CreatedAt < endOfDayUtc
                         && r.InventoryType == inventoryType
                         && r.ProductCode == request.ProductCode)
-                .FirstOrDefaultAsync();
-
-            if (userRecord is null)
-                throw new CustomNotFoundException("No existe registro para este producto");
+                .FirstOrDefaultAsync()
+                    ?? throw new CustomNotFoundException("No existe registro para este producto");
 
             var movementCount = await RegisterMovementType(userRecord, request, inventoryType);
             var utcNow = DateTime.UtcNow;
@@ -90,8 +81,10 @@ namespace CookManagement.VSA.Features.Movements.RegisterMovements
             }
 
             if (inventoryItem is null)
+            {
                 throw new CustomNotFoundException($"El Producto con código {request.ProductCode} no existe en " +
                     $"el Inventario de {inventoryType}");
+            }
 
             var entries = record.Entries + request.MovementCount;
             inventoryItem.CurrentStock += entries;
