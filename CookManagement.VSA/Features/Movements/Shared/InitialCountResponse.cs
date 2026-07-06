@@ -1,6 +1,6 @@
 ﻿using CookManagement.VSA.Domain.Enums;
 
-namespace CookManagement.VSA.Features.Movements.CreateInitialCount
+namespace CookManagement.VSA.Features.Movements.Shared
 {
     public sealed record InitialCountResponse
     {

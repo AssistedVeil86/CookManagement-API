@@ -1,4 +1,5 @@
-﻿using CookManagement.VSA.Features.Movements.CreateInitialCount;
+using CookManagement.VSA.Features.Movements.CreateInitialCount;
+using CookManagement.VSA.Features.Movements.ModifyInitialCount;
 using CookManagement.VSA.Features.Movements.RegisterMovements;
 using CookManagement.VSA.Features.Movements.UpdateFinalCount;
 using CookManagement.VSA.Infrastructure.Filters;
@@ -12,6 +13,7 @@ namespace CookManagement.VSA.Features.Movements
             services.AddScoped<CreateInitialCountHandler>();
             services.AddScoped<RegisterMovementHandler>();
             services.AddScoped<UpdateFinalCountHandler>();
+            services.AddScoped<ModifyInitialCountHandler>();
 
             return services;
         }
@@ -26,6 +28,7 @@ namespace CookManagement.VSA.Features.Movements
             movementsGroup.MapCreateInitialCountEndpoint();
             movementsGroup.MapRegisterMovementEndpoint();
             movementsGroup.MapUpdateFinalCountEndpoint();
+            movementsGroup.MapModifyInitialCountEndpoint();
 
             return app;
         }

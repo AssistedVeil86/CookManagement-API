@@ -1,11 +1,11 @@
 using System.Security.Claims;
+using CookManagement.VSA.Domain.Entities;
+using CookManagement.VSA.Domain.Enums;
+using CookManagement.VSA.Domain.Exceptions;
 using CookManagement.VSA.Features.Movements.Shared;
 using CookManagement.VSA.Infrastructure.Data;
 using CookManagement.VSA.Infrastructure.Extensions;
 using CookManagement.VSA.Infrastructure.TimeZones;
-using CookManagement.VSA.Domain.Entities;
-using CookManagement.VSA.Domain.Enums;
-using CookManagement.VSA.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CookManagement.VSA.Features.Movements.UpdateFinalCount;
@@ -58,10 +58,8 @@ internal sealed class UpdateFinalCountHandler(
                     && r.CreatedAt < endOfDayUtc
                     && r.InventoryType == inventoryType
                     && r.ProductCode == request.ProductCode)
-            .FirstOrDefaultAsync();
-
-        if (userRecord is null)
-            throw new CustomNotFoundException("No existe registro para este producto");
+            .FirstOrDefaultAsync()
+            ?? throw new CustomNotFoundException("No existe registro para este producto");
 
         if (userRecord.FinalInventory > 0)
             throw new CustomInvalidOperationException("El Inventario Final para ese product ya ha sido creado hoy");
