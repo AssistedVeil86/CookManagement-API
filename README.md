@@ -1,21 +1,21 @@
 # CookManagement API
 
-> A modern RESTful API for restaurant inventory management built with .NET 8 and Vertical Slice Architecture
+> A modern RESTful API for restaurant inventory management built with .NET 10 and Vertical Slice Architecture
 
 ## 📋 Overview
 
-CookManagement API is a small yet powerful API project designed to help restaurant owners manage their inventory efficiently. Built with C# 12 and ASP.NET Core using Minimal APIs, this project follows the **Vertical Slice Architecture** pattern for better code organization and maintainability.
+CookManagement API is a small yet powerful API project designed to help restaurant owners manage their inventory efficiently. Built with C# 14 and ASP.NET Core using Minimal APIs, this project follows the **Vertical Slice Architecture** pattern for better code organization and maintainability.
 
 This project was developed for learning purposes and to reinforce backend development and RESTful API building knowledge.
 
 ## 🚀 Technologies Used
 
-- **.NET 8** - Latest .NET framework
-- **C# 12** - Modern C# features
+- **.NET 10** - Latest .NET framework
+- **C# 14** - Modern C# features
 - **ASP.NET Core** - High-performance web framework
 - **PostgreSQL** - Robust relational database
 - **Entity Framework Core** - ORM for data access
-- **Swagger/OpenAPI** - API documentation
+- **Scalar** - API documentation
 - **JSON Web Tokens (JWT)** - Secure authentication
 
 ## ✨ Features
@@ -62,7 +62,7 @@ While functional, there are several areas identified for future enhancement:
 ## 🚀 How to Run the Project
 
 ### Prerequisites
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) installed on your machine
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) installed on your machine
 - PostgreSQL database server
 - An IDE of your choice:
   - Visual Studio
@@ -101,5 +101,5 @@ While functional, there are several areas identified for future enhancement:
    ```
 
 6. **Access the API**
-   - Navigate to `https://localhost:[port]/swagger` to view the API documentation
+   - Navigate to `https://localhost:[port]/scalar` to view the API documentation
    - The API is now up and running! 🎉
