@@ -24,12 +24,12 @@ public static class UpdateFinalEndpoint
     }
 
     private static async Task<IResult> Handler(
-        CountRequest request, ClaimsPrincipal user, UpdateFinalCountHandler handler)
+        CountRequest request, ClaimsPrincipal user, UpdateFinalCountHandler handler, InventoryType? inventoryType)
     {
         var userId = user.GetUserId();
         var userRole = user.GetUserRole();
 
-        var result = await handler.HandleAsync(userId, userRole, request);
+        var result = await handler.HandleAsync(userId, userRole, request, inventoryType);
         return Results.Ok(result);
     }
 }
@@ -39,7 +39,8 @@ internal sealed class UpdateFinalCountHandler(
     ILogger<UpdateFinalCountHandler> logger,
     TimeZoneService timeZoneService)
 {
-    public async Task<FinalCountResponse> HandleAsync(int userId, string userRole, CountRequest request)
+    public async Task<FinalCountResponse> HandleAsync(
+        int userId, string userRole, CountRequest request, InventoryType? inventoryType)
     {
         logger.LogInformation("El usuario con ID {userId} quiere registrar el inventario final " +
                                "para el producto con código {productCode}, con cantidad: {count}"
@@ -50,13 +51,14 @@ internal sealed class UpdateFinalCountHandler(
 
         var (startOfDayUtc, endOfDayUtc) = timeZoneService.GetTodayBoundariesInUtc(request.TimeZoneId);
 
-        var inventoryType = userRole == nameof(UserRole.Cocina) ? InventoryType.Cocina : InventoryType.Bar;
+        var resolvedInventoryType = inventoryType ??
+            (userRole == nameof(UserRole.Cocina) ? InventoryType.Cocina : InventoryType.Bar);
 
         var userRecord = await context.UserRecords
             .Where(r => r.UserId == userId
                     && r.CreatedAt >= startOfDayUtc
                     && r.CreatedAt < endOfDayUtc
-                    && r.InventoryType == inventoryType
+                    && r.InventoryType == resolvedInventoryType
                     && r.ProductCode == request.ProductCode)
             .FirstOrDefaultAsync()
             ?? throw new CustomNotFoundException("No existe registro para este producto");
@@ -72,7 +74,7 @@ internal sealed class UpdateFinalCountHandler(
         userRecord.DailyMove = dailyMove;
         userRecord.UpdatedAt = utcNow;
 
-        await UpdateInventoryProductStock(inventoryType, request.ProductCode, request.Count);
+        await UpdateInventoryProductStock(resolvedInventoryType, request.ProductCode, request.Count);
 
         await context.SaveChangesAsync();
 
