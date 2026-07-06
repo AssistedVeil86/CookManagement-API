@@ -7,7 +7,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CookManagement.VSA.Features.Users.UpdateUser;
 
-public class UpdateUserHandler(CookDbContext context, PasswordHasher hasher)
+public static class UpdateUserEndpoint
+{
+    public static RouteGroupBuilder MapUpdateUserEndpoint(this RouteGroupBuilder route)
+    {
+        route.MapPut("{userId:int}", Handler)
+            .Produces(StatusCodes.Status404NotFound)
+            .Produces<UserResponse>(StatusCodes.Status200OK)
+            .WithRequestValidation<UserRequest>()
+            .RequireAuthorization("SuperAdminOnly"); ;
+
+        return route;
+    }
+
+    private static async Task<IResult> Handler(int userId, UserRequest request, UpdateUserHandler handler)
+    {
+        var result = await handler.HandleAsync(userId, request);
+        return Results.Ok(result);
+    }
+}
+
+internal sealed class UpdateUserHandler(CookDbContext context, PasswordHasher hasher)
 {
     public async Task<UserResponse> HandleAsync(int userId, UserRequest request)
     {
