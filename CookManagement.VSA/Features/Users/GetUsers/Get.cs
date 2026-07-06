@@ -1,3 +1,4 @@
+using CookManagement.VSA.Features.Users.Shared;
 using CookManagement.VSA.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ public static class GetUsersEndpoint
     public static RouteGroupBuilder MapGetUsersEndpoint(this RouteGroupBuilder route)
     {
         route.MapGet("", Handler)
-            .Produces<List<Shared.DTOs.UserResponse>>(StatusCodes.Status200OK)
+            .Produces<List<UserResponse>>(StatusCodes.Status200OK)
             .RequireAuthorization("SuperAdminOnly");
 
         return route;
@@ -23,12 +24,12 @@ public static class GetUsersEndpoint
 
 internal sealed class GetUsersHandler(CookDbContext context)
 {
-    public async Task<List<Shared.DTOs.UserResponse>> HandleAsync()
+    public async Task<List<UserResponse>> HandleAsync()
     {
         var users = context.Users
             .Where(u => u.Name != "AdminLinus");
 
-        return await users.Select(u => new Shared.DTOs.UserResponse
+        return await users.Select(u => new UserResponse
         {
             UserId = u.Id,
             Name = u.Name,

@@ -1,8 +1,8 @@
 using System.Security.Claims;
+using CookManagement.VSA.Domain.Enums;
+using CookManagement.VSA.Domain.Exceptions;
 using CookManagement.VSA.Infrastructure.Data;
 using CookManagement.VSA.Infrastructure.Extensions;
-using CookManagement.VSA.Shared.Enums;
-using CookManagement.VSA.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CookManagement.VSA.Features.Inventory.GetInventory;
@@ -80,9 +80,9 @@ internal sealed class GetInventoryHandler(CookDbContext context)
             : await GetBarInventoryCount();
     }
 
-    private async Task<List<InventoryResponse>> GetKitchenInventory(int page, int pageSize, string? category)
+    private Task<List<InventoryResponse>> GetKitchenInventory(int page, int pageSize, string? category)
     {
-        return await context.KitchenInventory.AsNoTracking()
+        return context.KitchenInventory.AsNoTracking()
             .Where(x => x.Category.Contains(category))
             .OrderBy(x => x.Code)
             .Skip((page - 1) * pageSize)
@@ -98,9 +98,9 @@ internal sealed class GetInventoryHandler(CookDbContext context)
             }).ToListAsync();
     }
 
-    private async Task<List<InventoryResponse>> GetBarInventory(int page, int pageSize, string? category)
+    private Task<List<InventoryResponse>> GetBarInventory(int page, int pageSize, string? category)
     {
-        return await context.BarInventory.AsNoTracking()
+        return context.BarInventory.AsNoTracking()
             .Where(x => x.Category.Contains(category))
             .OrderBy(x => x.Code)
             .Skip((page - 1) * pageSize)
@@ -116,13 +116,13 @@ internal sealed class GetInventoryHandler(CookDbContext context)
             }).ToListAsync();
     }
 
-    private async Task<int> GetKitchenInventoryCount()
+    private Task<int> GetKitchenInventoryCount()
     {
-        return await context.KitchenInventory.CountAsync();
+        return context.KitchenInventory.CountAsync();
     }
 
-    private async Task<int> GetBarInventoryCount()
+    private Task<int> GetBarInventoryCount()
     {
-        return await context.BarInventory.CountAsync();
+        return context.BarInventory.CountAsync();
     }
 }

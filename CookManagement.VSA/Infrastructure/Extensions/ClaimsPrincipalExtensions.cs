@@ -1,4 +1,4 @@
-﻿using CookManagement.VSA.Shared.Exceptions;
+﻿using CookManagement.VSA.Domain.Exceptions;
 using System.Security.Claims;
 
 namespace CookManagement.VSA.Infrastructure.Extensions

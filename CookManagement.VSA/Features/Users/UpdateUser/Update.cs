@@ -1,8 +1,8 @@
+using CookManagement.VSA.Domain.Exceptions;
+using CookManagement.VSA.Features.Users.Shared;
 using CookManagement.VSA.Infrastructure.Auth;
 using CookManagement.VSA.Infrastructure.Data;
 using CookManagement.VSA.Infrastructure.Extensions;
-using CookManagement.VSA.Shared.DTOs;
-using CookManagement.VSA.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CookManagement.VSA.Features.Users.UpdateUser;
@@ -15,7 +15,7 @@ public static class UpdateUserEndpoint
             .Produces(StatusCodes.Status404NotFound)
             .Produces<UserResponse>(StatusCodes.Status200OK)
             .WithRequestValidation<UserRequest>()
-            .RequireAuthorization("SuperAdminOnly"); ;
+            .RequireAuthorization("SuperAdminOnly");
 
         return route;
     }
@@ -33,10 +33,8 @@ internal sealed class UpdateUserHandler(CookDbContext context, PasswordHasher ha
     {
         var currentUser = await context.Users
             .Where(u => u.Id == userId)
-            .FirstOrDefaultAsync();
-
-        if (currentUser is null)
-            throw new CustomNotFoundException("El Usuario no fue encontrado.");
+            .FirstOrDefaultAsync()
+            ?? throw new CustomNotFoundException("El Usuario no fue encontrado.");
 
         var hashedPassword = hasher.HashPassword(request.Password);
 

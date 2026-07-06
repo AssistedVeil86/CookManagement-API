@@ -3,9 +3,9 @@ using CookManagement.VSA.Features.Inventory.UpdateStock;
 using CookManagement.VSA.Features.Movements.CreateInitialCount;
 using CookManagement.VSA.Features.Movements.RegisterMovements;
 using CookManagement.VSA.Features.Movements.UpdateFinalCount;
-using CookManagement.VSA.Shared.DTOs;
-using CookManagement.VSA.Shared.Entities;
-using CookManagement.VSA.Shared.Enums;
+using CookManagement.VSA.Features.Users.Shared;
+using CookManagement.VSA.Domain.Entities;
+using CookManagement.VSA.Domain.Enums;
 
 namespace CookManagement.VSA.Infrastructure.Extensions
 {

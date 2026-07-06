@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CookManagement.VSA.Shared.Exceptions
+namespace CookManagement.VSA.Domain.Exceptions
 {
-    public class CustomInvalidAuthException : CustomBaseException
+    public class CustomNotFoundException : CustomBaseException
     {
-        public CustomInvalidAuthException(string message) : base(message)
+        public CustomNotFoundException(string message) : base(message)
         {
         }
 
-        public override int StatusCode { get; } = StatusCodes.Status401Unauthorized;
+        public override int StatusCode { get; } = StatusCodes.Status404NotFound;
 
         public override ProblemDetails GetProblemDetails()
         {
             return new ProblemDetails
             {
-                Title = "Unauthorized Access",
+                Title = "Resource Not Found",
                 Detail = $"{GetType().Name}: {Message}",
                 Status = StatusCode,
             };

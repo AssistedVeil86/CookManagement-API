@@ -1,7 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using CookManagement.VSA.Shared.Entities;
+using CookManagement.VSA.Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 

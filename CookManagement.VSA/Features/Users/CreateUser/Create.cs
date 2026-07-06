@@ -1,9 +1,9 @@
+using CookManagement.VSA.Features.Users.Shared;
 using CookManagement.VSA.Infrastructure.Auth;
 using CookManagement.VSA.Infrastructure.Data;
 using CookManagement.VSA.Infrastructure.Extensions;
-using CookManagement.VSA.Shared.DTOs;
-using CookManagement.VSA.Shared.Entities;
-using CookManagement.VSA.Shared.Exceptions;
+using CookManagement.VSA.Domain.Entities;
+using CookManagement.VSA.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CookManagement.VSA.Features.Users.CreateUser;

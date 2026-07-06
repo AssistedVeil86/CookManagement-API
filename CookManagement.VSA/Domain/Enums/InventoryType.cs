@@ -1,4 +1,4 @@
-﻿namespace CookManagement.VSA.Shared.Enums
+﻿namespace CookManagement.VSA.Domain.Enums
 {
     public enum InventoryType
     {

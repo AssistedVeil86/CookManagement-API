@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CookManagement.VSA.Shared.Exceptions
+namespace CookManagement.VSA.Domain.Exceptions
 {
     public abstract class CustomBaseException : Exception
     {

@@ -1,17 +1,10 @@
 ﻿
-using CookManagement.VSA.Shared.Exceptions;
+using CookManagement.VSA.Domain.Exceptions;
 
 namespace CookManagement.VSA.Infrastructure.Filters
 {
-    public class ExceptionFilter : IEndpointFilter
+    public class ExceptionFilter(ILogger<ExceptionFilter> logger) : IEndpointFilter
     {
-        private readonly ILogger<ExceptionFilter> _logger;
-
-        public ExceptionFilter(ILogger<ExceptionFilter> logger)
-        {
-            _logger = logger;
-        }
-
         public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
         {
             try
@@ -23,7 +16,7 @@ namespace CookManagement.VSA.Infrastructure.Filters
                 var endpoint = context.HttpContext.GetEndpoint();
                 var name = endpoint is RouteEndpoint routeEndpoint ? routeEndpoint.RoutePattern.RawText : "Unknown Route";
 
-                _logger.LogError(e, "Uncaught Exception in Endpoint {EndpointName}", name);
+                logger.LogError(e, "Uncaught Exception in Endpoint {EndpointName}", name);
 
                 var details = e.GetProblemDetails();
                 var statusCode = e.StatusCode;

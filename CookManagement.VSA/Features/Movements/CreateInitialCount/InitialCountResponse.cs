@@ -1,4 +1,4 @@
-﻿using CookManagement.VSA.Shared.Enums;
+﻿using CookManagement.VSA.Domain.Enums;
 
 namespace CookManagement.VSA.Features.Movements.CreateInitialCount
 {

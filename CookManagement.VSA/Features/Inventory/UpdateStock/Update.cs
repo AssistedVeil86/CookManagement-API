@@ -1,8 +1,8 @@
 using System.Security.Claims;
+using CookManagement.VSA.Domain.Enums;
+using CookManagement.VSA.Domain.Exceptions;
 using CookManagement.VSA.Infrastructure.Data;
 using CookManagement.VSA.Infrastructure.Extensions;
-using CookManagement.VSA.Shared.Enums;
-using CookManagement.VSA.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CookManagement.VSA.Features.Inventory.UpdateStock;
@@ -57,10 +57,8 @@ internal sealed class UpdateStockHandler(CookDbContext context, ILogger<UpdateSt
         logger.LogInformation("Se quiere actualizar el stock para el producto {productName}", productName);
 
         var product = await context.BarInventory
-            .FirstOrDefaultAsync(b => b.Product == productName);
-
-        if (product is null)
-            throw new CustomNotFoundException("Ese producto no existe en el inventario de Bar");
+            .FirstOrDefaultAsync(b => b.Product == productName)
+            ?? throw new CustomNotFoundException("Ese producto no existe en el inventario de Bar");
 
         product.CurrentStock = newStock;
         await context.SaveChangesAsync();
@@ -76,10 +74,8 @@ internal sealed class UpdateStockHandler(CookDbContext context, ILogger<UpdateSt
         logger.LogInformation("Se quiere actualizar el stock para el producto {productName}", productName);
 
         var product = await context.KitchenInventory
-            .FirstOrDefaultAsync(b => b.Product == productName);
-
-        if (product is null)
-            throw new CustomNotFoundException("Ese producto no existe en el inventario de Cocina");
+            .FirstOrDefaultAsync(b => b.Product == productName)
+            ?? throw new CustomNotFoundException("Ese producto no existe en el inventario de Cocina");
 
         product.CurrentStock = newStock;
         await context.SaveChangesAsync();

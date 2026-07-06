@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CookManagement.VSA.Shared.Exceptions
+namespace CookManagement.VSA.Domain.Exceptions
 {
-    public class CustomInvalidOperationException : CustomBaseException
+    public class CustomInvalidCredentialsException : CustomBaseException
     {
-        public CustomInvalidOperationException(string message) : base(message)
+        public CustomInvalidCredentialsException(string message) : base(message)
         {
         }
 
@@ -14,7 +14,7 @@ namespace CookManagement.VSA.Shared.Exceptions
         {
             return new ProblemDetails()
             {
-                Title = "Invalid Operation Attempt",
+                Title = "Invalid Auth Credentials",
                 Detail = $"{GetType().Name} - {Message}",
                 Status = StatusCode,
             };

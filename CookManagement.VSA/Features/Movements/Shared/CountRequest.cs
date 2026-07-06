@@ -1,6 +1,6 @@
 using System;
 
-namespace CookManagement.VSA.Shared.DTOs;
+namespace CookManagement.VSA.Features.Movements.Shared;
 
 public sealed record CountRequest
 {

@@ -1,8 +1,8 @@
+using CookManagement.VSA.Domain.Exceptions;
+using CookManagement.VSA.Features.Users.Shared;
 using CookManagement.VSA.Infrastructure.Auth;
 using CookManagement.VSA.Infrastructure.Data;
 using CookManagement.VSA.Infrastructure.Extensions;
-using CookManagement.VSA.Shared.DTOs;
-using CookManagement.VSA.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CookManagement.VSA.Features.Authentication.Login;
@@ -37,18 +37,14 @@ internal sealed class LoginHandler(
     {
         logger.LogInformation("El usuario {username} intenta iniciar sesión.", request.Name);
 
-        var user = await context.Users.FirstOrDefaultAsync(u => u.Name == request.Name);
-
-        if (user is null)
-            throw new CustomNotFoundException("El Usuario no existe");
-
+        var user = await context.Users.FirstOrDefaultAsync(u => u.Name == request.Name) ?? throw new CustomNotFoundException("El Usuario no existe");
         if (!passwordHasher.VerifyHashedPassword(user.Password, request.Password))
         {
             throw new CustomInvalidCredentialsException("Contraseña Invalida");
         }
 
         var accessToken = tokenService.CreateAccessToken(user);
-        
+
         var userResponse = new UserResponse()
         {
             UserId = user.Id,

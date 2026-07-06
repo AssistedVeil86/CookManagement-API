@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CookManagement.VSA.Shared.Exceptions
+namespace CookManagement.VSA.Domain.Exceptions
 {
-    public class CustomNotFoundException : CustomBaseException
+    public class CustomConflictException : CustomBaseException
     {
-        public CustomNotFoundException(string message) : base(message)
+        public CustomConflictException(string message) : base(message)
         {
         }
 
-        public override int StatusCode { get; } = StatusCodes.Status404NotFound;
+        public override int StatusCode { get; } = StatusCodes.Status409Conflict;
 
         public override ProblemDetails GetProblemDetails()
         {
             return new ProblemDetails
             {
-                Title = "Resource Not Found",
+                Title = "Resource Conflict",
                 Detail = $"{GetType().Name}: {Message}",
                 Status = StatusCode,
             };

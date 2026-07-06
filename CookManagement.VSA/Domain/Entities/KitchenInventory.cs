@@ -1,4 +1,4 @@
-﻿namespace CookManagement.VSA.Shared.Entities
+﻿namespace CookManagement.VSA.Domain.Entities
 {
     public class KitchenInventory : BaseInventory
     {

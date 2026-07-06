@@ -2,9 +2,9 @@ using System.Security.Claims;
 using CookManagement.VSA.Infrastructure.Data;
 using CookManagement.VSA.Infrastructure.Extensions;
 using CookManagement.VSA.Infrastructure.TimeZones;
-using CookManagement.VSA.Shared.Entities;
-using CookManagement.VSA.Shared.Enums;
-using CookManagement.VSA.Shared.Exceptions;
+using CookManagement.VSA.Domain.Entities;
+using CookManagement.VSA.Domain.Enums;
+using CookManagement.VSA.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CookManagement.VSA.Features.Movements.RegisterMovements;

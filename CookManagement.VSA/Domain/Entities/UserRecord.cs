@@ -1,6 +1,6 @@
-﻿using CookManagement.VSA.Shared.Enums;
+﻿using CookManagement.VSA.Domain.Enums;
 
-namespace CookManagement.VSA.Shared.Entities
+namespace CookManagement.VSA.Domain.Entities
 {
     public class UserRecord : BaseEntity
     {

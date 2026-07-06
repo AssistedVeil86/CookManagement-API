@@ -1,7 +1,7 @@
-using CookManagement.VSA.Shared.DTOs;
+using CookManagement.VSA.Features.Users.Shared;
 using FluentValidation;
 
-namespace CookManagement.VSA.Shared.Validators;
+namespace CookManagement.VSA.Features.Users.Shared;
 
 public class UserRequestValidator : AbstractValidator<UserRequest>
 {
