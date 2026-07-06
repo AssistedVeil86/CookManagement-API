@@ -1,10 +1,10 @@
 using System.Security.Claims;
-using CookManagement.VSA.Infrastructure.Data;
-using CookManagement.VSA.Infrastructure.Extensions;
-using CookManagement.VSA.Infrastructure.TimeZones;
 using CookManagement.VSA.Domain.Entities;
 using CookManagement.VSA.Domain.Enums;
 using CookManagement.VSA.Domain.Exceptions;
+using CookManagement.VSA.Infrastructure.Data;
+using CookManagement.VSA.Infrastructure.Extensions;
+using CookManagement.VSA.Infrastructure.TimeZones;
 using Microsoft.EntityFrameworkCore;
 
 namespace CookManagement.VSA.Features.Movements.RegisterMovements;
@@ -21,12 +21,12 @@ public static class RegisterMovementEndpoint
     }
 
     private static async Task<IResult> Handler(
-        MovementRequest request, RegisterMovementHandler handler, ClaimsPrincipal user)
+        MovementRequest request, RegisterMovementHandler handler, ClaimsPrincipal user, InventoryType? inventoryType)
     {
         var userId = user.GetUserId();
         var userRole = user.GetUserRole();
 
-        var result = await handler.HandleAsync(userId, userRole, request);
+        var result = await handler.HandleAsync(userId, userRole, request, inventoryType);
         return Results.Ok(result);
     }
 }
@@ -36,15 +36,15 @@ internal sealed class RegisterMovementHandler(
     ILogger<RegisterMovementHandler> logger,
     TimeZoneService timeZoneService)
 {
-    public async Task<MovementResponse> HandleAsync(int userId, string userRole, MovementRequest request)
+    public async Task<MovementResponse> HandleAsync(
+        int userId, string userRole, MovementRequest request, InventoryType? inventoryType)
     {
         logger.LogInformation("El usuario con ID {userId} quiere registrar un " +
                                "movimiento: {movement}, con cantidad: {count}"
             , userId, request.MovementType, request.MovementCount);
 
-        var inventoryType = userRole == nameof(UserRole.Cocina)
-            ? InventoryType.Cocina
-            : InventoryType.Bar;
+        var resolvedInventoryType = inventoryType ??
+            (userRole == nameof(UserRole.Cocina) ? InventoryType.Cocina : InventoryType.Bar);
 
         var (startOfDayUtc, endOfDayUtc) = timeZoneService.GetTodayBoundariesInUtc(request.TimeZoneId);
 
@@ -52,12 +52,12 @@ internal sealed class RegisterMovementHandler(
             .Where(r => r.UserId == userId
                     && r.CreatedAt >= startOfDayUtc
                     && r.CreatedAt < endOfDayUtc
-                    && r.InventoryType == inventoryType
+                    && r.InventoryType == resolvedInventoryType
                     && r.ProductCode == request.ProductCode)
             .FirstOrDefaultAsync()
                 ?? throw new CustomNotFoundException("No existe registro para este producto");
 
-        var movementCount = await RegisterMovementType(userRecord, request, inventoryType);
+        var movementCount = await RegisterMovementType(userRecord, request, resolvedInventoryType);
         var utcNow = DateTime.UtcNow;
 
         userRecord.UpdatedAt = utcNow;
