@@ -111,8 +111,10 @@ internal sealed class UpdateFinalCountHandler(
         }
 
         if (inventoryItem is null)
+        {
             throw new CustomNotFoundException($"El Producto con código {code} no existe en " +
                 $"el Inventario de {inventoryType}");
+        }
 
         if (inventoryItem.CurrentStock < finalCount || inventoryItem.CurrentStock == 0)
             throw new CustomInvalidOperationException("El Conteo Final no puede ser mayor al Stock");

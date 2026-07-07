@@ -53,6 +53,11 @@ internal sealed class ModifyInitialCountHandler(
                                 r.ProductCode == request.ProductCode)
         ?? throw new CustomNotFoundException("No se encontró un registro de inventario inicial para el producto especificado");
 
+        var timeSinceCreation = DateTimeOffset.UtcNow - todayRecord.CreatedAt;
+
+        if (timeSinceCreation > TimeSpan.FromHours(1))
+            throw new CustomInvalidOperationException("La ventana de modificación de 1 hora ha expirado");
+
         todayRecord.InitialInventory = request.Count;
         todayRecord.UpdatedAt = DateTimeOffset.UtcNow;
         await context.SaveChangesAsync();
