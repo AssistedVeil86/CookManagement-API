@@ -50,9 +50,9 @@ public class UserRecordConfiguration : IEntityTypeConfiguration<UserRecord>
             .HasConversion<string>();
 
         builder.Property(p => p.CreatedAt)
-            .HasDefaultValue(DateTimeOffset.Now);
+            .HasDefaultValueSql("NOW()");
 
         builder.Property(p => p.UpdatedAt)
-            .HasDefaultValue(DateTimeOffset.Now);
+            .HasDefaultValueSql("NOW()");
     }
 }
