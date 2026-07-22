@@ -18,133 +18,13 @@ namespace CookManagement.VSA.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //Primary Keys
-            modelBuilder.Entity<User>().HasKey(u => u.Id);
-            modelBuilder.Entity<UserRecord>().HasKey(r => r.Id);
-            modelBuilder.Entity<BarInventory>().HasKey(b => b.Code);
-            modelBuilder.Entity<KitchenInventory>().HasKey(k => k.Code);
-
-            //Foreign Keys
-            modelBuilder.Entity<UserRecord>().HasOne(r => r.User).WithMany(u => u.UserRecords)
-                .HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.Cascade);
-
-            //Indexes
-            modelBuilder.Entity<UserRecord>()
-                .HasIndex(r => new { r.UserId, r.ProductCode, r.CreatedAt })
-                .HasDatabaseName("IX_UserRecords_UserId_ProductCode_CreatedAt");
-
-            //Configuring Entities
-            ConfigureUserEntity(modelBuilder);
-            ConfigureUserRecordsEntity(modelBuilder);
-            ConfigureInventoryEntities(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CookDbContext).Assembly);
 
             //Seed Data
             SeedAdmins(modelBuilder);
             SeedBarUsers(modelBuilder);
             SeedKitchenUsers(modelBuilder);
             SeedSuperAdmin(modelBuilder);
-        }
-
-        private void ConfigureUserEntity(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.Property(u => u.Name)
-                .HasMaxLength(100).IsRequired();
-
-                entity.Property(u => u.Password)
-                    .HasMaxLength(100).IsRequired();
-
-                entity.Property(u => u.Role)
-                .HasConversion<String>();
-            });
-        }
-
-        private void ConfigureUserRecordsEntity(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<UserRecord>(entity =>
-            {
-                entity.Property(p => p.ProductCode)
-                    .HasMaxLength(10).IsRequired();
-
-                entity.Property(b => b.ProductName)
-                    .HasMaxLength(100).IsRequired();
-
-                entity.Property(p => p.InitialInventory)
-                    .HasDefaultValue(0);
-
-                entity.Property(p => p.FinalInventory)
-                    .HasDefaultValue(0);
-
-                entity.Property(p => p.Difference)
-                    .HasDefaultValue(0);
-
-                entity.Property(p => p.DailyMove)
-                    .HasDefaultValue(0);
-
-                entity.Property(p => p.Entries)
-                    .HasDefaultValue(0);
-
-                entity.Property(p => p.Courtesy)
-                    .HasDefaultValue(0);
-
-                entity.Property(p => p.Damaged)
-                    .HasDefaultValue(0);
-
-                entity.Property(p => p.Remains)
-                    .HasDefaultValue(0);
-
-                entity.Property(p => p.InventoryType)
-                    .HasConversion<String>();
-
-                entity.Property(p => p.CreatedAt)
-                    .HasDefaultValue(DateTimeOffset.Now);
-
-                entity.Property(p => p.UpdatedAt)
-                    .HasDefaultValue(DateTimeOffset.Now);
-            });
-        }
-
-        private void ConfigureInventoryEntities(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<BarInventory>(entity =>
-            {
-                entity.Property(b => b.Code)
-                    .HasMaxLength(10);
-
-                entity.Property(b => b.Product)
-                    .HasMaxLength(100).IsRequired();
-
-                entity.Property(b => b.Category)
-                    .HasMaxLength(50);
-
-                entity.Property(b => b.MinimumStock)
-                    .HasDefaultValue(0);
-
-                entity.Property(b => b.CurrentStock)
-                    .HasDefaultValue(0.0);
-            });
-
-            modelBuilder.Entity<KitchenInventory>(entity =>
-            {
-                entity.Property(k => k.Code)
-                    .HasMaxLength(10);
-
-                entity.Property(k => k.Product)
-                    .HasMaxLength(100).IsRequired();
-
-                entity.Property(k => k.Category)
-                    .HasMaxLength(50);
-
-                entity.Property(k => k.MeasurementUnit)
-                    .HasMaxLength(50);
-
-                entity.Property(k => k.MinimumStock)
-                    .HasDefaultValue(0.0);
-
-                entity.Property(k => k.CurrentStock)
-                    .HasDefaultValue(0.0);
-            });
         }
 
         private void SeedAdmins(ModelBuilder modelBuilder)
